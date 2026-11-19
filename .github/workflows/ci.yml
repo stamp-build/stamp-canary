@@ -1,0 +1,16 @@
+# Tiny CI for the Stamp post-release smoke canary: a few seconds, no secrets.
+name: ci
+on:
+  pull_request:
+  push:
+    branches: ["**"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - run: test -f README.md && echo ok
